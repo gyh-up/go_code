@@ -1,0 +1,5 @@
+package castest
+
+func main() {
+
+}

@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	//run()
+	run2()
 }
 
 //一个协程启动后，一般是代码执行完毕，自动退出，但是如果需要提前终止怎么办呢？
@@ -61,6 +61,8 @@ func run2() {
 	wg.Wait()
 }
 func worker2(ctx context.Context){
+	b := <- ctx.Done()
+	fmt.Println(b)
 	for {
 		select {
 		case <- ctx.Done():
