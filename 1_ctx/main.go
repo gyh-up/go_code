@@ -7,9 +7,10 @@ import (
 	"time"
 )
 
+const  N = 10
 func main() {
 
-	run2()
+	//run2()
 }
 
 //一个协程启动后，一般是代码执行完毕，自动退出，但是如果需要提前终止怎么办呢？
@@ -47,7 +48,7 @@ func worker1(stopWk chan bool){
 func run2() {
 	var wg sync.WaitGroup
 	ctx, stop := context.WithCancel(context.Background())
-	wg.Add(1)
+	wg.Add(2)
 	go func() {
 		defer wg.Done()
 		worker2(ctx)
@@ -61,13 +62,12 @@ func run2() {
 	wg.Wait()
 }
 func worker2(ctx context.Context){
-	b := <- ctx.Done()
-	fmt.Println(b)
+	//b := <- ctx.Done()
+	//fmt.Println(b)
 	for {
 		select {
 		case <- ctx.Done():
 			fmt.Println("下班咯~~~")
-			return
 		default:
 			fmt.Println("认真摸鱼中，请勿打扰...")
 		}
